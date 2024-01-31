@@ -4,5 +4,15 @@
 public class Divisors {
 	public static void main (String[] args) {
 		//// Put your code here
+		int input = Integer.parseInt(args[0]);
+		
+		System.out.println("1");
+
+		for(int i = 2 ; i < input ; i ++ ){
+			if(input % i == 0 ){
+				System.out.println(i);
+			}
+		}System.out.println(input);
+
 	}
 }
