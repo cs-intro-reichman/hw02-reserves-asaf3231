@@ -14,55 +14,53 @@ public class OneOfEachStats {
 		int seed = Integer.parseInt(args[1]);
 		// Initailizes a random numbers generator with the given seed value
         Random generator = new Random(seed);  
-		
-		int boy = 0; 
-		int girl = 0;
-		int sum = 0;
-		int counting = 0 ; 
-		int F2 = 0;
-		int F3 = 0;
-		int F4 = 0;
-		
+	int b = 0 ;
+	int g = 0;
+	int family_of_two = 0;
+	int family_of_three = 0;
+	int family_of_four_more = 0;
+	int num_of_kids = 0;
+	for(int t = 0; t < T; t++){
+		 b = 0;
+		 g = 0;
+		while (b==0 || g == 0){
+		double i = generator.nextDouble();
+			if (i > 0.5 ) {
+				b++;
+			} else {
+				g++;
+			}
+			
+		}
+		if ( b + g == 2 ) {
+			family_of_two++; 
+		}
+		else if ( b + g == 3) {
+			family_of_three++;
+		}
+		else {
+			family_of_four_more++;
+		}
+		num_of_kids += (b + g) ;
 
-		for (int j = 0 ; j < T ; j ++){
-			boy = 0;
-			girl =0;
-			counting= 0;
-			while ( boy == 0 || girl == 0 ){ 
-				double chance = generator.nextDouble(); 
-				if(chance > 0.5) {
-					boy++;
-					
-				}
-				else{
-					girl++;
-				}
-				counting +=1 ;
-				 
-				}
-			sum += counting;
+		}
+		System.out.println("Average: " + ( (double) (num_of_kids)/(T))+ " children to get at least one of each gender.");
+		System.out.println("Number of families with 2 children: " + family_of_two);
+		System.out.println("Number of families with 3 children: " + family_of_three);
+		System.out.println("Number of families with 4 or more children: " + family_of_four_more);
 
-				if( counting == 2 ){
-				F2 ++ ; 
-				}
-				else if( counting == 3 ){
-				F3 ++ ; 
-				}
-				else{
-				F4 ++ ; 
-				}
-				counting = 0 ; 
-				 ; 
-			}	
-		System.out.println();
-		System.out.println((double)sum/T + " children to get at least one of each gender.");
-		System.out.println("Number of families with 2 children: " + F2);
-		System.out.println("Number of families with 3 children: "  + F3 );
-		System.out.println("Number of families with 4 or more children:" + F4);
-		
-		if (F2 == Math.max( Math.max(F2,F3),F4)){ System.out.println("The most common number of children is 2.");}
-		if (F3 == Math.max( Math.max(F2,F3),F4)){ System.out.println("The most common number of children is 3." );} 
-		else{ System.out.println("The most common number of children is 4 or more.");}
+		int most_com = Math.max(Math.max(family_of_four_more, family_of_three), family_of_two);
+		if (family_of_two > family_of_three && family_of_two > family_of_four_more) {
+			most_com = 2;
+		}
+		else if (family_of_three > family_of_two && family_of_three > family_of_four_more) {
+			most_com = 3;
+		} else {
+			most_com = 4;
+		}
+		System.out.println("The most common number of children is " + most_com + ".");
+	}
+	}
 
 		//// In the previous version of this program, you used a statement like:
 		//// double rnd = Math.random();
@@ -74,5 +72,4 @@ public class OneOfEachStats {
 		//// randomization will be based on the given seed.
 		//// This is the only change that you have to do in the program.
 		    
-	}
-}
+
